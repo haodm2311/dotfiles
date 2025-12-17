@@ -12,7 +12,7 @@ return {
         opts = {
             auto_install = true,
             -- manually install packages that do not exist in this list please
-            ensure_installed = { "zls", "ts_ls", "gopls" },
+            ensure_installed = { "gopls" },
         },
     },
     {
@@ -39,22 +39,22 @@ return {
             }
             vim.lsp.enable('lua_ls')
 
-            vim.lsp.config['ts_ls'] = {
-                capabilities = capabilities,
-            }
-
-            vim.lsp.config['zls'] = {
-                capabilities = capabilities,
-            }
-
+            -- vim.lsp.config['ts_ls'] = {
+            --     capabilities = capabilities,
+            -- }
+            --
+            -- vim.lsp.config['zls'] = {
+            --     capabilities = capabilities,
+            -- }
+	    
             vim.lsp.config['yamlls'] = {
                 capabilities = capabilities,
             }
 
-            -- docker compose
-            vim.lsp.config['docker_compose_language_service'] = {
-                capabilities = capabilities,
-            }
+            -- -- docker compose
+            -- vim.lsp.config['docker_compose_language_service'] = {
+            --     capabilities = capabilities,
+            -- }
 
             -- python
             vim.lsp.config['pyright'] = {
@@ -75,10 +75,10 @@ return {
             })
 
             vim.lsp.enable({
-                'ts_ls',
-                'zls',
+                -- 'ts_ls',
+                -- 'zls',
                 'yamlls',
-                'docker_compose_language_service',
+                -- 'docker_compose_language_service',
                 'pyright',
                 'gopls',
             })
@@ -96,9 +96,9 @@ return {
                 local filetype = vim.bo.filetype
                 local symbols_map = {
                     python = "function",
-                    javascript = "function",
-                    typescript = "function",
-                    java = "class",
+                    -- javascript = "function",
+                    -- typescript = "function",
+                    -- java = "class",
                     lua = "function",
                     go = { "method", "struct", "interface" },
                 }
