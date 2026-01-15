@@ -12,7 +12,7 @@ return {
         opts = {
             auto_install = true,
             -- manually install packages that do not exist in this list please
-            ensure_installed = { "gopls" },
+            ensure_installed = { "gopls" , "terraformls"},
         },
     },
     {
@@ -66,12 +66,27 @@ return {
                 capabilities = capabilities,
             }
 
-            -- ✅ Add this after your LSP setups
+            -- terraform
+            vim.lsp.config['terraformls'] = {
+                capabilities = capabilities,
+            }
+
+            -- ✅ Auto Formatting after save file: add this after your LSP setups
             vim.api.nvim_create_autocmd("BufWritePre", {
                 pattern = "*.go",
                 callback = function()
                     vim.lsp.buf.format({ async = false })
                 end,
+            })
+
+            vim.api.nvim_create_autocmd("BufWritePre", {
+              pattern = { "*.tf", "*.tfvars" },
+              callback = function()
+                vim.lsp.buf.format({
+                  async = false,
+                  timeout_ms = 2000,
+                })
+              end,
             })
 
             vim.lsp.enable({
@@ -81,6 +96,7 @@ return {
                 -- 'docker_compose_language_service',
                 'pyright',
                 'gopls',
+                'terraformls',
             })
             -- lsp kepmap setting
             vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
