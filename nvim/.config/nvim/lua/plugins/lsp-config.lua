@@ -12,7 +12,7 @@ return {
         opts = {
             auto_install = true,
             -- manually install packages that do not exist in this list please
-            ensure_installed = { "gopls" , "terraformls"},
+            ensure_installed = { "gopls" , "terraformls", "sqls"},
         },
     },
     {
@@ -71,6 +71,11 @@ return {
                 capabilities = capabilities,
             }
 
+            -- sql  
+            vim.lsp.config['sqls'] = {
+                capabilities =  capabilities,
+            }
+
             -- ✅ Auto Formatting after save file: add this after your LSP setups
             vim.api.nvim_create_autocmd("BufWritePre", {
                 pattern = "*.go",
@@ -89,6 +94,16 @@ return {
               end,
             })
 
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                pattern = "*.sql",
+                callback = function()
+                    vim.lsp.buf.format({
+                        async = false,
+                        timeout_ms = 2000,
+                    })
+                end,
+            })
+
             vim.lsp.enable({
                 -- 'ts_ls',
                 -- 'zls',
@@ -97,6 +112,7 @@ return {
                 'pyright',
                 'gopls',
                 'terraformls',
+                'sqls'
             })
             -- lsp kepmap setting
             vim.keymap.set("n", "K", vim.lsp.buf.hover, {})

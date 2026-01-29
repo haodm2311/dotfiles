@@ -23,7 +23,8 @@ return {
 				"json",
 				-- "zig",
        			"python",
-                "terraform"
+                "terraform",
+                "sql"
 			},
 			sync_install = false,
 			highlight = { enable = true },
