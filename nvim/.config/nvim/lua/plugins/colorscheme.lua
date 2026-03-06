@@ -6,8 +6,10 @@ return {
     config = function()
       -- Function to make background transparent
       function ColorMyPencils(color)
-        color = color or "catppuccin"
-        vim.cmd.colorscheme(color)
+        -- color = color or "catppuccin"
+        -- vim.cmd.colorscheme(color)
+        vim.cmd.colorscheme("onehalfdark")
+        vim.opt.termguicolors = true
 
         -- Make UI transparent
         vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
@@ -50,4 +52,3 @@ return {
     end,
   },
 }
-
