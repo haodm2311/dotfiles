@@ -51,7 +51,7 @@ client.background       $back
 bar {
     status_command i3status
 
-    font pango:Fira Code 12
+    font pango:Fira Code 6
     colors {
         background $back
     }
@@ -70,8 +70,8 @@ bar {
 # }
 
 # Gaps
-gaps inner 4
-gaps outer 8
+gaps inner 2
+gaps outer 0
 
 # Terminal
 set $term ghostty
@@ -99,16 +99,19 @@ bindsym $mod+Ctrl+k resize grow height 10 px
 bindsym $mod+Ctrl+j resize shrink height 10 px
 
 ## Workspaces
-bindsym $mod+2 workspace 2
-bindsym $mod+1 workspace 1
 bindsym $mod+0 workspace 0
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
 
-bindsym $mod+Shift+b move container to workspace 2
 bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
 
 # Move Ghostty to workspace 1
 for_window [class="ghostty"] move to workspace 1
 for_window [class="firefox"] move to workspace 2
+for_window [class="DBeaver"] move to workspace 3
 
 # Borders
 default_border pixel 1
@@ -125,3 +128,6 @@ exec --no-startup-id i3-msg workspace 1
 
 # Autostart
 exec --no-startup-id ghostty
+
+# Resolution adjust
+exec_always --no-startup-id ~/.config/i3/monitor.sh

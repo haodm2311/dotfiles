@@ -12,7 +12,7 @@ return {
         opts = {
             auto_install = true,
             -- manually install packages that do not exist in this list please
-            ensure_installed = { "gopls" , "terraformls", "sqls"},
+            ensure_installed = { "gopls" , "terraformls", "sqls", "ts_ls"},
         },
     },
     {
@@ -39,14 +39,47 @@ return {
             }
             vim.lsp.enable('lua_ls')
 
-            -- vim.lsp.config['ts_ls'] = {
-            --     capabilities = capabilities,
-            -- }
-            --
-            -- vim.lsp.config['zls'] = {
-            --     capabilities = capabilities,
-            -- }
-	    
+            vim.lsp.config['ts_ls'] = {
+                capabilities = capabilities,
+                filetypes = {
+                    "javascript",
+                    "typescript",
+                    "vue",
+                  },
+                settings = {
+                    typescript = {
+                      inlayHints = {
+                        includeInlayParameterNameHints = "none",
+                        includeInlayVariableTypeHints = false,
+                        includeInlayFunctionParameterTypeHints = false,
+                      },
+                    },
+                    javascript = {
+                      inlayHints = {
+                        includeInlayParameterNameHints = "none",
+                      },
+                    },
+                  },
+            }
+
+            vim.lsp.config["eslint"] = {
+                capabilities = capabilities,
+            }
+
+            vim.lsp.config["tailwindcss"] = {
+                capabilities = capabilities,
+            }
+
+            -- vue
+            vim.lsp.config["vue_ls"] = {
+                capabilities = capabilities,
+                filetypes = { "vue" },
+            }
+
+            vim.lsp.config['zls'] = {
+                capabilities = capabilities,
+            }
+
             vim.lsp.config['yamlls'] = {
                 capabilities = capabilities,
             }
@@ -67,8 +100,14 @@ return {
             }
 
             -- terraform
+            vim.filetype.add({
+              extension = {
+                tfvars = "terraform",
+              },
+            })
             vim.lsp.config['terraformls'] = {
                 capabilities = capabilities,
+                filetypes = { "terraform", "terraform-vars" },
             }
 
             -- sql  
@@ -77,6 +116,16 @@ return {
             }
 
             -- ✅ Auto Formatting after save file: add this after your LSP setups
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                pattern = "*.py",
+                callback = function ()
+                    vim.lsp.buf.format({
+                        async = false,
+                        timeout_ms = 2000
+                    })
+                end,
+            })
+
             vim.api.nvim_create_autocmd("BufWritePre", {
                 pattern = "*.go",
                 callback = function()
@@ -105,9 +154,12 @@ return {
             })
 
             vim.lsp.enable({
-                -- 'ts_ls',
-                -- 'zls',
+                'ts_ls',
+                "eslint",
+                "zls",
+                "tailwindcss",
                 'yamlls',
+                'vue_ls',
                 -- 'docker_compose_language_service',
                 'pyright',
                 'gopls',
@@ -128,8 +180,8 @@ return {
                 local filetype = vim.bo.filetype
                 local symbols_map = {
                     python = "function",
-                    -- javascript = "function",
-                    -- typescript = "function",
+                    javascript = "function",
+                    typescript = "function",
                     -- java = "class",
                     lua = "function",
                     go = { "method", "struct", "interface" },
