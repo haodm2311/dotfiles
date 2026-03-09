@@ -200,6 +200,31 @@ hi link gitcommitSelectedArrow gitcommitSelectedFile
 hi link gitcommitUnmergedArrow gitcommitUnmergedFile
 " }
 
+" Vue {
+call s:h("VueTag", s:red, "", "")
+call s:h("VueAttribute", s:blue, "", "")
+call s:h("VueUrlString", s:purple, "", "")
+call s:h("VueNormal", s:yellow, "", "")
+call s:h("VueTag", s:red, "", "")
+call s:h("HtmlTag", s:red, "", "")
+call s:h("HtmlAttribute", s:blue, "", "")
+call s:h("HtmlNormal", s:yellow, "", "")
+call s:h("HtmlUrlString", s:purple, "", "")
+
+hi! link @none.vue VueNormal
+hi! link @tag.vue VueTag
+hi! link @tag.delimiter.vue VueDelimiter
+hi! link @tag.attribute.vue VueAttribute
+hi! link @tag.builtin.vue VueTag
+hi! link @string.special.url.vue VueUrlString
+
+
+hi! link @none.html HtmlNormal
+hi! link @tag.html HtmlTag
+hi! link @tag.attribute.html HtmlAttribute
+hi! link @string.special.url.html HtmlUrlString
+" }
+
 " Fix colors in neovim terminal buffers {
   if has('nvim')
     let g:terminal_color_0 = s:black.gui
