@@ -16,6 +16,18 @@ return {
         },
     },
     {
+      "stevearc/conform.nvim",
+      opts = {
+        formatters_by_ft = {
+          javascript = { "prettier" },
+          typescript = { "prettier" },
+          vue = { "prettier" },
+          html = { "prettier" },
+          css = { "prettier" },
+        },
+      },
+    },
+    {
         "neovim/nvim-lspconfig",
         lazy = false,
         config = function()
@@ -169,9 +181,11 @@ return {
                 end,
             })
 
-            vim.api.nvim_create_autocmd("FileType", { 
-                pattern = { "vue", "html", "css" },
-                callback = function() vim.treesitter.start() end,
+            vim.api.nvim_create_autocmd("BufWritePre", {
+              pattern = { "*.vue", "*.js", "*.ts", "*.html", "*.css" },
+              callback = function(args)
+                require("conform").format({ bufnr = args.buf })
+              end,
             })
 
             vim.lsp.enable({
