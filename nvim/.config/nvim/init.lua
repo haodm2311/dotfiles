@@ -16,3 +16,4 @@ require "haodm.options"
 require "haodm.keymaps"
 require "haodm.toggleterm"
 require("lazy").setup("plugins")
+

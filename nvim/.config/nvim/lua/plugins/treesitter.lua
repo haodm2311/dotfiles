@@ -16,6 +16,7 @@ return {
                 "vue",
 				-- "tsx",
 				"html",
+                "css",
 				"go",
 				"gomod",
 				"gowork",

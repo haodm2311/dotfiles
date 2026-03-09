@@ -40,25 +40,22 @@ return {
             vim.lsp.enable('lua_ls')
 
             vim.lsp.config['ts_ls'] = {
+                cmd = { "typescript-language-server", "--stdio" },
                 capabilities = capabilities,
-                filetypes = {
-                    "javascript",
-                    "typescript",
-                    "vue",
+                init_options = {
+                    plugins = {
+                      {
+                        name = "@vue/typescript-plugin",
+                        location = vim.fn.stdpath("data")
+                          .. "/mason/packages/vue-language-server/node_modules/@vue/language-server",
+                        languages = { "vue" },
+                      },
+                    },
                   },
-                settings = {
-                    typescript = {
-                      inlayHints = {
-                        includeInlayParameterNameHints = "none",
-                        includeInlayVariableTypeHints = false,
-                        includeInlayFunctionParameterTypeHints = false,
-                      },
-                    },
-                    javascript = {
-                      inlayHints = {
-                        includeInlayParameterNameHints = "none",
-                      },
-                    },
+                  filetypes = {
+                    "typescript",
+                    "javascript",
+                    "vue",
                   },
             }
 
@@ -70,15 +67,34 @@ return {
                 capabilities = capabilities,
             }
 
-            -- vue
-            vim.lsp.config["vue_ls"] = {
+            vim.lsp.config["html"] = {
                 capabilities = capabilities,
-                filetypes = { "vue" },
+                filetypes = {"html"},
             }
 
-            vim.lsp.config['zls'] = {
+            vim.lsp.config["cssls"] = {
                 capabilities = capabilities,
             }
+
+            -- vue
+            -- vim.lsp.config["vue_ls"] = {
+            --     capabilities = capabilities,
+            --     filetypes = { "vue" },
+            -- }
+            vim.lsp.config["vue_ls"] = {
+              cmd = { "vue-language-server", "--stdio" },
+              capabilities = capabilities,
+              filetypes = { "vue" },
+              init_options = {
+                vue = {
+                  hybridMode = true,
+                },
+              },
+            }
+
+            -- vim.lsp.config['zls'] = {
+            --     capabilities = capabilities,
+            -- }
 
             vim.lsp.config['yamlls'] = {
                 capabilities = capabilities,
@@ -151,6 +167,11 @@ return {
                         timeout_ms = 2000,
                     })
                 end,
+            })
+
+            vim.api.nvim_create_autocmd("FileType", { 
+                pattern = { "vue", "html", "css" },
+                callback = function() vim.treesitter.start() end,
             })
 
             vim.lsp.enable({
