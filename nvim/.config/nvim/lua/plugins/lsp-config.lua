@@ -1,5 +1,4 @@
-return {
-    {
+return { {
         "williamboman/mason.nvim",
         -- version = "v1.11.0",
         config = function()
@@ -75,10 +74,18 @@ return {
                 capabilities = capabilities,
             }
 
-            vim.lsp.config["tailwindcss"] = {
+            vim.lsp.config['tailwindcss'] = {
                 capabilities = capabilities,
+                  filetypes = {
+                    "html",
+                    "css",
+                    "javascript",
+                    "javascriptreact",
+                    "typescript",
+                    "typescriptreact",
+                    "vue",
+                  },
             }
-
             vim.lsp.config["html"] = {
                 capabilities = capabilities,
                 filetypes = {"html"},
