@@ -4,6 +4,7 @@ vim.opt.guicursor = {
   "r-cr-o:hor20",   -- horizontal bar (20% height) in Replace & Operator‑pending
 }
 
+vim.opt.clipboard = "unnamedplus"
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
