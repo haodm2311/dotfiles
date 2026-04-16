@@ -8,7 +8,8 @@ return {
 			auto_install = true,
 			-- add language you want to highlight in code
 			ensure_installed = {
-				-- "c",
+				"c",
+                "cpp",
 				"lua",
 				"vim",
 				-- "javascript",

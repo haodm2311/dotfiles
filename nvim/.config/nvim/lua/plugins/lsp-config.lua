@@ -12,7 +12,7 @@ return {
         opts = {
             auto_install = true,
             -- manually install packages that do not exist in this list please
-            ensure_installed = { "gopls" , "terraformls", "sqls"},
+            ensure_installed = { "gopls" , "terraformls", "sqls", "clangd"},
         },
     },
     {
@@ -76,6 +76,21 @@ return {
                 capabilities =  capabilities,
             }
 
+            -- C++ (clangd)
+            vim.lsp.config['clangd'] = {
+                capabilities = capabilities,
+                cmd = {
+                    "clangd",
+                    "--query-driver=/usr/bin/clang++,/usr/bin/g++,/Library/Developer/CommandLineTools/usr/bin/clang++",
+                    "--background-index",
+                    "--clang-tidy",
+                    "--header-insertion=iwyu",
+                    "--completion-style=detailed",
+                    "--function-arg-placeholders",
+                    "--fallback-style=llvm",
+                },
+            }
+
             -- ✅ Auto Formatting after save file: add this after your LSP setups
             vim.api.nvim_create_autocmd("BufWritePre", {
                 pattern = "*.go",
@@ -104,6 +119,13 @@ return {
                 end,
             })
 
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                pattern = { "*.c", "*.cpp", "*.h", "*.hpp" },
+                callback = function()
+                    vim.lsp.buf.format({ async = false })
+                end,
+            })
+
             vim.lsp.enable({
                 -- 'ts_ls',
                 -- 'zls',
@@ -112,7 +134,8 @@ return {
                 'pyright',
                 'gopls',
                 'terraformls',
-                'sqls'
+                'sqls',
+                'clangd'
             })
             -- lsp kepmap setting
             vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
@@ -133,6 +156,8 @@ return {
                     -- java = "class",
                     lua = "function",
                     go = { "method", "struct", "interface" },
+                    cpp = { "function", "class", "struct" }, -- Added cpp
+                    c = "function",
                 }
                 local symbols = symbols_map[filetype] or "function"
                 require("fzf-lua").lsp_document_symbols({ symbols = symbols })
