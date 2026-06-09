@@ -86,3 +86,5 @@ echo "  python3.12 --version"
 echo "  rg --version"
 echo "  aerospace --version"
 echo "  echo \$SHELL"
+
+echo "For tmux to work, please open a tmux session then Ctrl a + I then source tmux config file"
