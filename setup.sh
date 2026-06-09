@@ -30,6 +30,10 @@ brew install \
   ripgrep \
   zsh-syntax-highlighting
 
+echo "Installing tpm for tmux"
+mkdir -p ~/.tmux/plugins
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
 echo "Installing AeroSpace..."
 brew install --cask nikitabobko/tap/aerospace
 
