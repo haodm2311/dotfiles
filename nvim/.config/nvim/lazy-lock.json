@@ -12,6 +12,7 @@
   "fzf-lua": { "branch": "main", "commit": "a8458b79a957a6e3e217d84106a0fd4b9470ff4c" },
   "go.nvim": { "branch": "master", "commit": "81bb94c1d21648245eb14c69461f5c7f8c705752" },
   "guihua.lua": { "branch": "master", "commit": "314b89924a798f3b2ef72e80270c5730286cebc5" },
+  "jupynvim": { "branch": "main", "commit": "8705984384b2d89ebf4950dc4504478b7c0fd380" },
   "lazy.nvim": { "branch": "main", "commit": "85c7ff3711b730b4030d03144f6db6375044ae82" },
   "lualine.nvim": { "branch": "master", "commit": "3946f0122255bc377d14a59b27b609fb3ab25768" },
   "mason-lspconfig.nvim": { "branch": "main", "commit": "d7b5feb6e769e995f7fcf44d92f49f811c51d10c" },
