@@ -33,6 +33,7 @@ return {
       -- Catppuccin setup
       require("catppuccin").setup({
         flavour = "mocha", -- 🌙 dark mode
+        -- flavour = "latte", -- 🌙 light mode
         transparent_background = true, -- also make plugin backgrounds transparent
         background = {
           light = "latte",
@@ -53,7 +54,8 @@ return {
       })
 
       -- Apply the colorscheme
-      vim.cmd.colorscheme("onehalfdark")
+       vim.cmd.colorscheme("onehalfdark")
+       -- vim.cmd.colorscheme("catppuccin")
 
       -- Apply transparency
       ColorMyPencils()
