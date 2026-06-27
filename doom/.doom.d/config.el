@@ -90,7 +90,9 @@
   (setq lsp-ui-doc-enable t
         lsp-ui-doc-position 'at-point      ; box appears at cursor
         lsp-ui-doc-show-with-cursor t       ; show on cursor hover
-        lsp-ui-doc-show-with-mouse t))
+        lsp-ui-doc-show-with-mouse t
+        lsp-ui-doc-show-with-cursor nil
+        lsp-ui-doc-show-with-mouse nil))
 
 (use-package! lsp-pyright
   :after lsp-mode)
